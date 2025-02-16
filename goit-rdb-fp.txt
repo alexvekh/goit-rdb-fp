@@ -1,7 +1,4 @@
-# goit-rdb-fp
-
-
-## 1  ----------------------------------------------------------
+-- 1  ---------------------------------------------------------
 
 create schema pandemic;
 
@@ -10,7 +7,7 @@ use pandemic;
 SELECT * FROM pandemic.infectious_cases;
 
 
-## 2  ----------------------------------------------------------
+-- 2  ----------------------------------------------------------
 
 CREATE TABLE entities (
     id INT PRIMARY KEY auto_increment,
@@ -31,7 +28,7 @@ CREATE TABLE infectious (
     number_tuberculosis FLOAT,
     number_smallpox FLOAT,
     number_cholera_cases INT,
-    UNIQUE (entity_id, year)
+    UNIQUE (entity_id, year)  -- Унікальність даних по року для кожної країни
 );
 
 INSERT INTO entities (entity, code)
@@ -54,7 +51,7 @@ FROM infectious_cases ic
 JOIN entities e ON ic.Entity = e.entity AND ic.Code = e.code;
 
 
-## 3  ------------------------------------------------------------
+-- 3  ------------------------------------------------------------
 
 SELECT e.entity, 
 	e.code, 
@@ -70,7 +67,7 @@ order by average_number_rabies DESC
 limit 10;
 
 
-## 4 --------------------------------------------------------------
+-- 4 --------------------------------------------------------------
 
 SELECT id, year, 
        DATE_FORMAT(CONCAT(year, '-01-01'), '%Y-%m-%d') AS start_date,
@@ -79,7 +76,7 @@ SELECT id, year,
 FROM infectious;
 
 
-## 5  -------------------------------------------------------------
+-- 5  -----------------------------------------------------------
 
 DROP FUNCTION IF EXISTS YearsPass;
 
@@ -98,7 +95,7 @@ SELECT id, year, YearsPass(year) as years_pass
 FROM infectious;
 
 
-## or  ------------------------------------------------------------
+-- or  -----------------------------------------------------------
 
 DROP FUNCTION IF EXISTS YearsPass;
 
